@@ -13,9 +13,10 @@ let clearDisplay = () => {
 };
 
 let calculate = () => {
+  let equation = display.value;
   try {
-    display.value = eval(display.value);
-    calcHistory.push(display.value); // Save to history
+    display.value = eval(equation);
+    calcHistory.push(equation + " = " + display.value); // Save the equation with result to history
     saveHistory(); // Save to local storage
   } catch (error) {
     display.value = "Error";
