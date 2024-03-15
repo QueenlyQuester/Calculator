@@ -1,4 +1,8 @@
-const display = document.getElementById("display");
+let calcHistory = JSON.parse(localStorage.getItem("calcHistory")) || [];
+
+let saveHistory = () => {
+  localStorage.setItem("calcHistory", JSON.stringify(calcHistory));
+};
 
 let appendToDisplay = (input) => {
   display.value += input;
@@ -8,12 +12,11 @@ let clearDisplay = () => {
   display.value = "";
 };
 
-let calcHistory = [];
-
 let calculate = () => {
   try {
     display.value = eval(display.value);
     calcHistory.push(display.value); // Save to history
+    saveHistory(); // Save to local storage
   } catch (error) {
     display.value = "Error";
   }
