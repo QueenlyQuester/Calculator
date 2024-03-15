@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Calculator | Aexter</title>
+    </head>
+    <body>
+        <div id="calculator">
+            <input id="display" type="text" aria-label="Calculator display"
+                readonly>
+            <div role="group" aria-label="Calculator buttons">
+                <button tabindex="0" class="operator-btn" aria-label="Clear"
+                    onclick="clearDisplay()">C</button>
+                <button tabindex="0" aria-label="Seven"
+                    onclick="appendToDisplay('7')">7</button>
+                <button tabindex="0" aria-label="Eight"
+                    onclick="appendToDisplay('8')">8</button>
+                <button tabindex="0" aria-label="Nine"
+                    onclick="appendToDisplay('9')">9</button>
+                <button tabindex="0" class="operator-btn" aria-label="Subtract"
+                    onclick="appendToDisplay('-')">-</button>
+                <button tabindex="0" aria-label="Four"
+                    onclick="appendToDisplay('4')">4</button>
+                <button tabindex="0" aria-label="Five"
+                    onclick="appendToDisplay('5')">5</button>
+                <button tabindex="0" aria-label="Six"
+                    onclick="appendToDisplay('6')">6</button>
+                <button tabindex="0" class="operator-btn" aria-label="Multiply"
+                    onclick="appendToDisplay('*')">*</button>
+                <button tabindex="0" aria-label="One"
+                    onclick="appendToDisplay('1')">1</button>
+                <button tabindex="0" aria-label="Two"
+                    onclick="appendToDisplay('2')">2</button>
+                <button tabindex="0" aria-label="Three"
+                    onclick="appendToDisplay('3')">3</button>
+                <button tabindex="0" class="operator-btn" aria-label="Add"
+                    onclick="appendToDisplay('+')">+</button>
+                <button tabindex="0" class="operator-btn" aria-label="Divide"
+                    onclick="appendToDisplay('/')">/</button>
+                <button tabindex="0" aria-label="Zero"
+                    onclick="appendToDisplay('0')">0</button>
+                <button tabindex="0" aria-label="Decimal"
+                    onclick="appendToDisplay('.')">.</button>
+                <button tabindex="0" class="operator-btn" aria-label="Calculate"
+                    onclick="calculate()">=</button>
+                <button tabindex="0" class="history-btn" aria-label="History"
+                    onclick="openHistory()">History</button>
+            </div>
+
+            <div id="historyDialog" role="dialog" aria-modal="true"
+                aria-labelledby="historyDialogTitle" hidden>
+                <h2 id="historyDialogTitle">Calculation History</h2>
+                <div id="historyContent"></div>
+                <button onclick="closeHistory()">Close</button>
+            </div>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
