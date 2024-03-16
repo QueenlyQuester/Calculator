@@ -55,13 +55,15 @@ function clearDisplay() {
 }
 
 function calculate() {
+  const equation = display.value;
   try {
-    const result = eval(display.value);
+    const operation = new Function("return " + equation);
+    const result = operation();
     if (isNaN(result) || !isFinite(result)) {
-      throw new Error("Invalid calculation – please try again.");
+      throw new Error("Invalid calculation - please try again.");
     }
     display.value = result;
-    calcHistory.push(display.value + " = " + result);
+    calcHistory.push(equation + " = " + result);
     saveHistory();
     historyContent.setAttribute("aria-live", "polite");
     historyContent.innerHTML = calcHistory.join("<br>");
