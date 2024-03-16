@@ -62,8 +62,7 @@ function calculate() {
         "Incomplete expression - please enter a number after the operator."
       );
     }
-    const operation = new Function("return " + equation);
-    const result = operation();
+    const result = math.evaluate(equation); // Using math.js library's evaluate function
     if (isNaN(result) || !isFinite(result)) {
       if (equation.includes("/0")) {
         throw new Error("Division by zero is not possible - please try again.");
