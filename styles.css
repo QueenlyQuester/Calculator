@@ -6,6 +6,7 @@ body {
   align-items: center;
   height: 100vh;
   margin: 0;
+  font-size: 18px;
 }
 
 #calculator {
@@ -26,14 +27,15 @@ input[type="text"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #ddd;
+  border: 1px solid #666;
   border-radius: 5px;
   box-sizing: border-box;
+  font-size: 1.2em;
 }
 
 button {
-  padding: 10px 20px;
-  background-color: #002766;
+  padding: 15px 25px;
+  background-color: #2b2b2b;
   color: #fff;
   border: none;
   border-radius: 5px;
@@ -41,7 +43,7 @@ button {
 }
 
 button:hover {
-  background-color: #001d4d;
+  background-color: #1d1d1d;
 }
 
 button:active {

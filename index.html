@@ -55,10 +55,12 @@
             <div id="historyDialog" role="dialog" aria-modal="true"
                 aria-labelledby="historyDialogTitle" hidden>
                 <h2 id="historyDialogTitle">Calculation History</h2>
-                <div id="historyContent"></div>
-                <button onclick="closeHistory()">Close</button>
+                <div id="historyContent" aria-live="polite"
+                    aria-atomic="true"></div>
+                <button onclick="closeHistory()"
+                    aria-label="Close History">Close</button>
             </div>
-        </div>
+        </main>
         <script src="script.js"></script>
     </body>
 </html>

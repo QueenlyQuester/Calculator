@@ -1,19 +1,24 @@
 let activeElementBeforeDialog;
 const calcHistory = [];
+
+const display = document.getElementById("display");
+const historyContent = document.getElementById("historyContent");
+
 function openHistory() {
   const historyDialog = document.getElementById("historyDialog");
   historyDialog.removeAttribute("hidden");
   activeElementBeforeDialog = document.activeElement;
   historyDialog.focus();
-  document.getElementById("historyContent").innerHTML =
-    calcHistory.join("<br>");
+  historyContent.innerHTML = calcHistory.join("<br>");
   trapFocus(historyDialog);
 }
+
 function closeHistory() {
   const historyDialog = document.getElementById("historyDialog");
   historyDialog.setAttribute("hidden", "");
   activeElementBeforeDialog && activeElementBeforeDialog.focus();
 }
+
 function trapFocus(element) {
   const focusableElements = element.querySelectorAll(
     'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -36,23 +41,28 @@ function trapFocus(element) {
     }
   });
 }
-const saveHistory = () => {
+
+function saveHistory() {
   localStorage.setItem("calcHistory", JSON.stringify(calcHistory));
-};
-const appendToDisplay = (input) => {
+}
+
+function appendToDisplay(input) {
   display.value += input;
-};
-const clearDisplay = () => {
+}
+
+function clearDisplay() {
   display.value = "";
-};
-const calculate = () => {
-  const display = document.getElementById("display");
-  const equation = display.value;
+}
+
+function calculate() {
+  const operation = new Function("return " + display.value);
   try {
-    display.value = eval(equation);
-    calcHistory.push(equation + " = " + display.value);
+    display.value = operation();
+    calcHistory.push(display.value + " = " + operation());
     saveHistory();
+    historyContent.setAttribute("aria-live", "polite");
+    historyContent.innerHTML = calcHistory.join("<br>");
   } catch (error) {
-    display.value = "Error";
+    display.value = "Invalid calculation – please try again.";
   }
-};
+}
