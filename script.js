@@ -71,3 +71,12 @@ function calculate() {
     display.value = error.message;
   }
 }
+document
+  .getElementById("darkModeToggle")
+  .addEventListener("click", function (event) {
+    const isDarkMode = document.body.classList.toggle("dark-mode");
+    this.setAttribute(
+      "aria-label",
+      isDarkMode ? "Disable Dark Mode" : "Enable Dark Mode"
+    );
+  });

@@ -110,3 +110,59 @@ button:active {
 #historyDialog button:active {
   background-color: #00133f;
 }
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
+}
+
+body.dark-mode #calculator {
+  background-color: #444;
+}
+
+body.dark-mode input[type="text"],
+body.dark-mode #historyDialog {
+  background-color: #555;
+  color: #fff;
+}
+
+body.dark-mode button {
+  background-color: #888;
+  color: #000;
+}
+
+body.dark-mode button:hover {
+  background-color: #aaa;
+}
+
+body.dark-mode button:active {
+  background-color: #ccc;
+}
+
+body.dark-mode .operator-btn {
+  background-color: #999;
+}
+
+body.dark-mode .operator-btn:hover,
+body.dark-mode #historyDialog button:hover {
+  background-color: #bbb;
+}
+
+body.dark-mode .operator-btn:active,
+body.dark-mode #historyDialog button:active {
+  background-color: #ddd;
+}
+
+body.dark-mode #historyDialog {
+  background-color: #444;
+  color: #fff;
+}
+
+body.dark-mode #historyContent {
+  background-color: #555;
+  color: #fff;
+}
+
+body.dark-mode #historyDialog button {
+  background-color: #888;
+  color: #000;
+}
