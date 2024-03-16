@@ -57,6 +57,11 @@ function clearDisplay() {
 function calculate() {
   const equation = display.value;
   try {
+    if (/[+\-*/%]$/.test(equation.trim())) {
+      throw new Error(
+        "Incomplete expression - please enter a number after the operator."
+      );
+    }
     const operation = new Function("return " + equation);
     const result = operation();
     if (isNaN(result) || !isFinite(result)) {
@@ -75,12 +80,3 @@ function calculate() {
     display.value = error.message;
   }
 }
-document
-  .getElementById("darkModeToggle")
-  .addEventListener("click", function (event) {
-    const isDarkMode = document.body.classList.toggle("dark-mode");
-    this.setAttribute(
-      "aria-label",
-      isDarkMode ? "Disable Dark Mode" : "Enable Dark Mode"
-    );
-  });
