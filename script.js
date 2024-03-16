@@ -60,7 +60,11 @@ function calculate() {
     const operation = new Function("return " + equation);
     const result = operation();
     if (isNaN(result) || !isFinite(result)) {
-      throw new Error("Invalid calculation - please try again.");
+      if (equation.includes("/0")) {
+        throw new Error("Division by zero is not possible - please try again.");
+      } else {
+        throw new Error("Invalid calculation - please try again.");
+      }
     }
     display.value = result;
     calcHistory.push(equation + " = " + result);
