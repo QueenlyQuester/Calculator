@@ -13,8 +13,12 @@
             <input id="display" type="text" aria-label="Calculator display"
                 readonly>
             <div role="group" aria-label="Calculator buttons">
-                <button tabindex="0" class="operator-btn" aria-label="Clear"
-                    onclick="clearDisplay()">C</button>
+                <button tabindex="0" class="operator-btn clear-btn"
+                    id="clear-btn" aria-label="Clear"
+                    onclick="clearDisplay()"
+                    aria-describedby="clear-description">C</button>
+                <p id="clear-description" style="display: none;">Clears the
+                    display of the calculator</p>
                 <button tabindex="0" aria-label="Seven"
                     onclick="appendToDisplay('7')">7</button>
                 <button tabindex="0" aria-label="Eight"
