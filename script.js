@@ -55,14 +55,17 @@ function clearDisplay() {
 }
 
 function calculate() {
-  const operation = new Function("return " + display.value);
   try {
-    display.value = operation();
-    calcHistory.push(display.value + " = " + operation());
+    const result = eval(display.value);
+    if (isNaN(result) || !isFinite(result)) {
+      throw new Error("Invalid calculation – please try again.");
+    }
+    display.value = result;
+    calcHistory.push(display.value + " = " + result);
     saveHistory();
     historyContent.setAttribute("aria-live", "polite");
     historyContent.innerHTML = calcHistory.join("<br>");
   } catch (error) {
-    display.value = "Invalid calculation – please try again.";
+    display.value = error.message;
   }
 }
