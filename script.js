@@ -9,7 +9,7 @@ function openHistory() {
   historyDialog.removeAttribute("hidden");
   activeElementBeforeDialog = document.activeElement;
   historyDialog.focus();
-  historyContent.innerHTML = calcHistory.join("<br>");
+  historyContent.textContent = calcHistory.join("\n");
   trapFocus(historyDialog);
 }
 
