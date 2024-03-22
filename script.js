@@ -63,7 +63,7 @@ function calculate() {
       );
     }
     const result = math.evaluate(equation); // Using math.js library's evaluate function
-    if (isNaN(result) || !isFinite(result)) {
+    if (Number.isNaN(result) || !isFinite(result)) {
       if (equation.includes("/0")) {
         throw new Error("Division by zero is not possible - please try again.");
       } else {
@@ -76,6 +76,6 @@ function calculate() {
     historyContent.setAttribute("aria-live", "polite");
     historyContent.textContent = calcHistory.join("\n");
   } catch (error) {
-    display.textContent = error.message; // Update the display with the error message
+    display.value = error.message; // Update the display with the error message
   }
 }
