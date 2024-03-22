@@ -8,10 +8,13 @@ body {
   margin: 0;
   font-size: 18px;
   transition: background-color 0.5s ease, color 0.5s ease;
+  line-height: 150%; /* Make text easier to read */
 }
 
 #calculator {
-  display: inline-block;
+  display: flex; /* Make layout more flexible */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements in column */
   padding: 20px;
   background-color: #fff;
   border-radius: 5px;
@@ -21,96 +24,38 @@ body {
 [role="group"] {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
+  gap: 1rem; /* easy to increase or decrease size */
 }
 
 input[type="text"] {
   width: 100%;
   padding: 10px;
   margin-bottom: 20px;
-  border: 1px solid #666;
-  border-radius: 5px;
+  border: 0.125rem solid #666;
+  border-radius: 0.3125rem; /* Larger radius gives the text field a rounder look */
   box-sizing: border-box;
   font-size: 1.2em;
 }
 
 button {
+  display: flex; /* Use Flexbox layout for buttons, too */
+  justify-content: center; /* Center button content horizontally */
+  align-items: center; /* Center button content vertically */
   padding: 15px 25px;
   background-color: #2b2b2b;
   color: #fff;
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease; /* Use transitions for smoother color change */
 }
 
-button:hover {
-  background-color: #1d1d1d;
-}
-
+button:hover,
 button:active,
+.operator-btn:active,
+.operator-btn:hover,
 .operator-btn:active {
-  background-color: #00133f;
-}
-
-.operator-btn {
-  background-color: #2b2b2b;
-}
-
-.operator-btn:hover {
-  background-color: #242424;
-}
-
-.operator-btn:active {
-  background-color: #1e1e1e;
-}
-
-#historyDialog {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background-color: #fff;
-  border-radius: 5px;
-  padding: 20px;
-  z-index: 1000;
-  width: 80%;
-  max-width: 400px;
-  box-shadow: 0px 10px 30px -5px rgba(0, 0, 0, 0.75);
-  overflow-y: auto;
-}
-
-#historyDialogTitle {
-  text-align: center;
-  margin-bottom: 20px;
-  color: #002766;
-}
-
-#historyContent {
-  max-height: 200px;
-  overflow-y: auto;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-}
-
-#historyDialog button {
-  display: block;
-  width: 100%;
-  padding: 10px;
-  margin-top: 20px;
-  background-color: #002766;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-#historyDialog button:hover {
-  background-color: #001d4d;
-}
-
-#historyDialog button:active {
-  background-color: #00133f;
+  opacity: 0.7;
 }
 
 body.dark-mode {
@@ -119,72 +64,13 @@ body.dark-mode {
 }
 
 body.dark-mode #calculator {
-  background-color: #444;
+  background-color: #595959;
 }
 
 body.dark-mode input[type="text"],
-body.dark-mode #historyDialog {
-  background-color: #555;
-  color: #fff;
-}
-
-body.dark-mode button {
-  background-color: #888;
-  color: #000;
-}
-
-body.dark-mode button:hover {
-  background-color: #aaa;
-}
-
-body.dark-mode button:active {
-  background-color: #ccc;
-}
-
-body.dark-mode .operator-btn {
-  background-color: #999;
-}
-
-body.dark-mode .operator-btn:hover,
-body.dark-mode #historyDialog button:hover {
-  background-color: #bbb;
-}
-
-body.dark-mode .operator-btn:active,
-body.dark-mode #historyDialog button:active {
-  background-color: #ddd;
-}
-
-body.dark-mode #historyDialog {
-  background-color: #444;
-  color: #fff;
-}
-
-body.dark-mode #historyContent {
-  background-color: #555;
-  color: #fff;
-}
-
-.clear-btn {
-  background-color: #ffa500;
-}
-
-.clear-btn:hover {
-  background-color: #ff8c00;
-}
-
-.clear-btn:active {
-  background-color: #ff7f50;
-}
-
-body.dark-mode .clear-btn {
-  background-color: #ff6347;
-}
-
-body.dark-mode .clear-btn:hover {
-  background-color: #ff4500;
-}
-
-body.dark-mode .clear-btn:active {
-  background-color: #ff0000;
+body.dark-mode #historyDialog body.dark-mode button,
+body.dark-mode .operator-btn,
+body.dark-mode #historyDialog button {
+  background-color: #484848;
+  color: #e0e0e0; /* Lighten font colors for improved readability */
 }
