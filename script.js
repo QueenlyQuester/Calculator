@@ -79,3 +79,26 @@ function calculate() {
     display.value = error.message; // Update the display with the error message
   }
 }
+document
+  .getElementById("darkModeToggle")
+  .addEventListener("click", function () {
+    document.body.classList.toggle("dark-mode");
+    const isDarkModeOn = document.body.classList.contains("dark-mode");
+    this.setAttribute("aria-pressed", isDarkModeOn);
+    this.blur(); // remove focus after toggling
+  });
+function loadTheme() {
+  if (localStorage.getItem("theme") === "dark") {
+    document.body.classList.add("dark-mode");
+  }
+}
+
+loadTheme();
+document
+  .getElementById("darkModeToggle")
+  .addEventListener("click", function () {
+    const isDarkModeOn = document.body.classList.toggle("dark-mode");
+    localStorage.setItem("theme", isDarkModeOn ? "dark" : "light");
+    this.setAttribute("aria-pressed", isDarkModeOn);
+    this.blur();
+  });
