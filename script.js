@@ -53,7 +53,7 @@ function appendToDisplay(input) {
   }
   display.value += input;
 }
-function handleError(error) {
+function handleError(_error) {
   // Set a standard error message
   display.value = "Error: Incomplete Expression";
 }
