@@ -74,7 +74,7 @@ function calculate() {
     calcHistory.push(equation + " = " + result);
     saveHistory();
     historyContent.setAttribute("aria-live", "polite");
-    historyContent.innerHTML = calcHistory.join("<br>");
+    historyContent.textContent = calcHistory.join("\n");
   } catch (error) {
     display.textContent = error.message; // Update the display with the error message
   }
