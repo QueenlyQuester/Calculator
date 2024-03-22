@@ -47,6 +47,10 @@ function saveHistory() {
 }
 
 function appendToDisplay(input) {
+  // If the current display is an Error, clear it
+  if (display.value.includes("Error")) {
+    display.value = "";
+  }
   display.value += input;
 }
 
