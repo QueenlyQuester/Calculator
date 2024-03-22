@@ -82,10 +82,10 @@ function calculate() {
 document
   .getElementById("darkModeToggle")
   .addEventListener("click", function () {
-    document.body.classList.toggle("dark-mode");
-    const isDarkModeOn = document.body.classList.contains("dark-mode");
+    const isDarkModeOn = document.body.classList.toggle("dark-mode");
+    localStorage.setItem("theme", isDarkModeOn ? "dark" : "light");
     this.setAttribute("aria-pressed", isDarkModeOn);
-    this.blur(); // remove focus after toggling
+    this.blur();
   });
 function loadTheme() {
   if (localStorage.getItem("theme") === "dark") {
@@ -94,11 +94,3 @@ function loadTheme() {
 }
 
 loadTheme();
-document
-  .getElementById("darkModeToggle")
-  .addEventListener("click", function () {
-    const isDarkModeOn = document.body.classList.toggle("dark-mode");
-    localStorage.setItem("theme", isDarkModeOn ? "dark" : "light");
-    this.setAttribute("aria-pressed", isDarkModeOn);
-    this.blur();
-  });
