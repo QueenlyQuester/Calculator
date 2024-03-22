@@ -76,6 +76,6 @@ function calculate() {
     historyContent.setAttribute("aria-live", "polite");
     historyContent.innerHTML = calcHistory.join("<br>");
   } catch (error) {
-    display.value = error.message;
+    display.textContent = error.message; // Update the display with the error message
   }
 }
