@@ -1,99 +1,50 @@
-/* Reset default browser styles */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-/* Global styles */
-:root {
-  --main-font: Arial, sans-serif;
-  --main-bg-color: #f0f0f0;
-  --main-text-color: #333;
-  --main-btn-bg-color: #2b2b2b;
-  --main-btn-text-color: #fff;
-  --main-btn-hover-opacity: 0.7;
-  --main-btn-transition: background-color 0.3s ease;
-  --main-border-radius: 5px;
-}
-
 body {
-  font-family: var(--main-font);
-  background-color: var(--main-bg-color);
-  color: var(--main-text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 18px;
-  line-height: 150%; /* Make text easier to read */
-  transition: background-color 0.5s ease, color 0.5s ease;
+  font-family: Arial, sans-serif;
+  background-color: #f8f9fa;
+  text-align: center;
 }
 
-#calculator {
-  display: flex; /* Make layout more flexible */
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center elements in column */
-  padding: 20px;
+.calculator {
+  margin: 50px auto;
+  width: 300px;
   background-color: #fff;
-  border-radius: var(--main-border-radius);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 5px;
+  padding: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-[role="group"] {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem; /* easy to increase or decrease size */
-}
-
-input[type="text"] {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 20px;
-  border: 0.125rem solid #666;
-  border-radius: var(
-    --main-border-radius
-  ); /* Larger radius gives the text field a rounder look */
-  font-size: 1.2em;
-  box-sizing: border-box;
-}
-
-button {
-  display: flex; /* Use Flexbox layout for buttons, too */
-  justify-content: center; /* Center button content horizontally */
-  align-items: center; /* Center button content vertically */
-  padding: 15px 25px;
-  background-color: var(--main-btn-bg-color);
-  color: var(--main-btn-text-color);
-  border: none;
-  border-radius: var(--main-border-radius);
+.calculator input[type="button"] {
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #f8f9fa;
   cursor: pointer;
-  transition: var(
-    --main-btn-transition
-  ); /* Use transitions for smoother color change */
 }
 
-button:hover,
-button:active,
-.operator-btn:active,
-.operator-btn:hover,
-.operator-btn:active {
-  opacity: var(--main-btn-hover-opacity);
+.calculator input[type="text"] {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  font-size: 20px;
+  text-align: right;
+  border: 1px solid #ccc;
+  border-radius: 5px;
 }
 
-body.dark-mode {
-  background-color: #333;
-  color: #fff;
+.history {
+  margin-top: 20px;
 }
 
-body.dark-mode #calculator {
-  background-color: #595959;
+.history ul {
+  list-style-type: none;
+  padding: 0;
+  text-align: left;
 }
 
-body.dark-mode input[type="text"],
-body.dark-mode #historyDialog body.dark-mode button,
-body.dark-mode .operator-btn,
-body.dark-mode #historyDialog button {
-  background-color: #484848;
-  color: #e0e0e0; /* Lighten font colors for improved readability */
+.history li {
+  padding: 5px;
+  border-bottom: 1px solid #ccc;
 }
