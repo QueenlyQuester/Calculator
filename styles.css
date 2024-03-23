@@ -1,60 +1,98 @@
-body {
-  font-family: Arial, sans-serif;
-  background-color: #f8f9fa;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.calculator {
-  max-width: 400px;
-  margin: 50px auto;
-  background-color: #fff;
-  border-radius: 5px;
+/* Global styles */
+:root {
+  --main-font: Arial, sans-serif;
+  --main-bg-color: #f0f0f0;
+  --main-text-color: #333;
+  --main-btn-bg-color: #2b2b2b;
+  --main-btn-text-color: #fff;
+  --main-btn-hover-opacity: 0.7;
+  --main-btn-transition: background-color 0.3s ease;
+  --main-border-radius: 5px;
+}
+
+body {
+  font-family: var(--main-font);
+  background-color: var(--main-bg-color);
+  color: var(--main-text-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-size: 18px;
+  line-height: 150%; /* Make text easier to read */
+  transition: background-color 0.5s ease, color 0.5s ease;
+}
+
+#calculator {
+  display: flex; /* Make layout more flexible */
+  flex-direction: column; /* Stack elements vertically */
+  align-items: center; /* Center elements in column */
   padding: 20px;
+  background-color: #fff;
+  border-radius: var(--main-border-radius);
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-.calculator h2 {
-  text-align: center;
+[role="group"] {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem; /* easy to increase or decrease size */
+}
+
+input[type="text"] {
+  width: 100%;
+  padding: 10px;
   margin-bottom: 20px;
+  border: 0.125rem solid #666;
+  border-radius: var(
+    --main-border-radius
+  ); /* Larger radius gives the text field a rounder look */
+  font-size: 1.2em;
+  box-sizing: border-box;
 }
 
-.calculator input {
-  width: 100%;
-  margin-bottom: 10px;
-  padding: 10px;
-  font-size: 18px;
-  border: 1px solid #ced4da;
-  border-radius: 5px;
-}
-
-.calculator button {
-  width: 100%;
-  padding: 10px;
-  margin-top: 10px;
-  font-size: 18px;
+button {
+  display: flex; /* Use Flexbox layout for buttons, too */
+  justify-content: center; /* Center button content horizontally */
+  align-items: center; /* Center button content vertically */
+  padding: 15px 25px;
+  background-color: var(--main-btn-bg-color);
+  color: var(--main-btn-text-color);
   border: none;
-  border-radius: 5px;
-  background-color: #007bff;
-  color: #fff;
+  border-radius: var(--main-border-radius);
   cursor: pointer;
+  transition: var(
+    --main-btn-transition
+  ); /* Use transitions for smoother color change */
 }
 
-.history {
-  margin-top: 20px;
+button:hover,
+button:active,
+.operator-btn:active,
+.operator-btn:hover,
+.operator-btn:active {
+  opacity: var(--main-btn-hover-opacity);
 }
 
-.history h3 {
-  text-align: center;
-  margin-bottom: 10px;
+body.dark-mode {
+  background-color: #333;
+  color: #fff;
 }
 
-.history-list {
-  list-style: none;
-  padding: 0;
+body.dark-mode #calculator {
+  background-color: #595959;
 }
 
-.history-item {
-  background-color: #f1f1f1;
-  padding: 10px;
-  margin-bottom: 5px;
-  border-radius: 5px;
+body.dark-mode input[type="text"],
+body.dark-mode #historyDialog body.dark-mode button,
+body.dark-mode .operator-btn,
+body.dark-mode #historyDialog button {
+  background-color: #484848;
+  color: #e0e0e0; /* Lighten font colors for improved readability */
 }

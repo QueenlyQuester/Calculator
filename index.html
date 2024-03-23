@@ -1,82 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <meta charset="utf-8" />
-        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-        <title>
-            Calculator
-        </title>
-        <link
-            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-            rel="stylesheet" />
-        <meta content="noindex, nofollow" name="robots" />
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="styles.css">
+        <title>Calculator | Aexter</title>
     </head>
     <body>
-        <div class="container">
-            <div class="calculator">
-                <h2>
-                    Basic Calculator
-                </h2>
-                <input disabled id="display" type="text" />
-                <button onclick="addToDisplay('1')">
-                    1
-                </button>
-                <button onclick="addToDisplay('2')">
-                    2
-                </button>
-                <button onclick="addToDisplay('3')">
-                    3
-                </button>
-                <button onclick="addToDisplay('+')">
-                    +
-                </button>
-                <button onclick="addToDisplay('4')">
-                    4
-                </button>
-                <button onclick="addToDisplay('5')">
-                    5
-                </button>
-                <button onclick="addToDisplay('6')">
-                    6
-                </button>
-                <button onclick="addToDisplay('-')">
-                    -
-                </button>
-                <button onclick="addToDisplay('7')">
-                    7
-                </button>
-                <button onclick="addToDisplay('8')">
-                    8
-                </button>
-                <button onclick="addToDisplay('9')">
-                    9
-                </button>
-                <button onclick="addToDisplay('*')">
-                    *
-                </button>
-                <button onclick="addToDisplay('C')">
-                    C
-                </button>
-                <button onclick="addToDisplay('0')">
-                    0
-                </button>
-                <button onclick="addToDisplay('/')">
-                    /
-                </button>
-                <button onclick="calculate()">
-                    =
-                </button>
+        <button id="darkModeToggle" aria-label="Toggle Dark Mode">Toggle Dark
+            Mode</button>
+        <main>
+            <div id="calculator">
+                <input id="display" type="text" aria-label="Calculator display"
+                    readonly>
+                <div role="group" aria-label="Calculator buttons">
+                    <button tabindex="0" class="operator-btn clear-btn"
+                        id="clear-btn" aria-label="Clear"
+                        onclick="clearDisplay()">C</button>
+                    <button tabindex="0" aria-label="Seven"
+                        onclick="appendToDisplay('7')">7</button>
+                    <button tabindex="0" aria-label="Eight"
+                        onclick="appendToDisplay('8')">8</button>
+                    <button tabindex="0" aria-label="Nine"
+                        onclick="appendToDisplay('9')">9</button>
+                    <button tabindex="0" class="operator-btn"
+                        aria-label="Subtract"
+                        onclick="appendToDisplay('-')">-</button>
+                    <button tabindex="0" aria-label="Four"
+                        onclick="appendToDisplay('4')">4</button>
+                    <button tabindex="0" aria-label="Five"
+                        onclick="appendToDisplay('5')">5</button>
+                    <button tabindex="0" aria-label="Six"
+                        onclick="appendToDisplay('6')">6</button>
+                    <button tabindex="0" class="operator-btn"
+                        aria-label="Multiply"
+                        onclick="appendToDisplay('*')">*</button>
+                    <button tabindex="0" aria-label="One"
+                        onclick="appendToDisplay('1')">1</button>
+                    <button tabindex="0" aria-label="Two"
+                        onclick="appendToDisplay('2')">2</button>
+                    <button tabindex="0" aria-label="Three"
+                        onclick="appendToDisplay('3')">3</button>
+                    <button tabindex="0" class="operator-btn" aria-label="Add"
+                        onclick="appendToDisplay('+')">+</button>
+                    <button tabindex="0" class="operator-btn"
+                        aria-label="Divide"
+                        onclick="appendToDisplay('/')">/</button>
+                    <button tabindex="0" aria-label="Zero"
+                        onclick="appendToDisplay('0')">0</button>
+                    <button tabindex="0" aria-label="Decimal"
+                        onclick="appendToDisplay('.')">.</button>
+                    <button tabindex="0" class="operator-btn"
+                        aria-label="Calculate" onclick="calculate()">=</button>
+                    <button tabindex="0" class="operator-btn"
+                        aria-label="Percentage"
+                        onclick="appendToDisplay('%')">%</button>
+                    <a tabindex="0" id="historyDialog" role="dialog"
+                        aria-modal="true" aria-labelledby="historyDialogTitle"
+                        hidden onclick="openHistory()">
+                        <h2 id="historyDialogTitle">Calculation History</h2>
+                        <div id="historyContent" aria-live="polite"
+                            aria-atomic="true"></div>
+                        <button onclick="closeHistory()"
+                            aria-label="Close History">Close</button>
+                    </a>
+                </div>
             </div>
-            <div class="history">
-                <h3>
-                    Calculation History
-                </h3>
-                <ul class="history-list" id="historyList">
-                </ul>
-                <button class="btn btn-danger" onclick="clearHistory()">
-                    Clear History
-                </button>
-            </div>
-        </div>
+        </main>
+        <script async
+            src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.4.0/math.js"></script>
+        <script async src="script.js"></script>
     </body>
 </html>
