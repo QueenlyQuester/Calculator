@@ -1,26 +1,39 @@
+let displayValue = "";
 let history = [];
 
 function addToDisplay(value) {
-  document.getElementById("display").value += value;
-}
-
-function clearDisplay() {
-  document.getElementById("display").value = "";
+  displayValue += value;
+  document.getElementById("display").value = displayValue;
 }
 
 function calculate() {
-  let result = eval(document.getElementById("display").value);
-  history.push(document.getElementById("display").value + " = " + result);
-  document.getElementById("display").value = result;
-  updateHistory();
+  try {
+    const result = eval(displayValue);
+    history.push({
+      expression: displayValue,
+      result: result,
+    });
+    displayValue = "";
+    document.getElementById("display").value = result;
+    updateHistory();
+  } catch (error) {
+    displayValue = "";
+    document.getElementById("display").value = "Error";
+  }
 }
 
 function updateHistory() {
-  let historyList = document.getElementById("historyList");
+  const historyList = document.getElementById("historyList");
   historyList.innerHTML = "";
   history.forEach((item) => {
-    let li = document.createElement("li");
-    li.textContent = item;
+    const li = document.createElement("li");
+    li.className = "history-item";
+    li.textContent = `${item.expression} = ${item.result}`;
     historyList.appendChild(li);
   });
+}
+
+function clearHistory() {
+  history = [];
+  updateHistory();
 }

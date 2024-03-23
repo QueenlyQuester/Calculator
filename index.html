@@ -6,38 +6,77 @@
         <title>
             Calculator
         </title>
+        <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet" />
         <meta content="noindex, nofollow" name="robots" />
     </head>
     <body>
-        <div class="calculator">
-            <input disabled id="display" type="text" />
-            <br />
-            <input onclick="addToDisplay('7')" type="button" value="7" />
-            <input onclick="addToDisplay('8')" type="button" value="8" />
-            <input onclick="addToDisplay('9')" type="button" value="9" />
-            <input onclick="addToDisplay('/')" type="button" value="/" />
-            <br />
-            <input onclick="addToDisplay('4')" type="button" value="4" />
-            <input onclick="addToDisplay('5')" type="button" value="5" />
-            <input onclick="addToDisplay('6')" type="button" value="6" />
-            <input onclick="addToDisplay('*')" type="button" value="*" />
-            <br />
-            <input onclick="addToDisplay('1')" type="button" value="1" />
-            <input onclick="addToDisplay('2')" type="button" value="2" />
-            <input onclick="addToDisplay('3')" type="button" value="3" />
-            <input onclick="addToDisplay('-')" type="button" value="-" />
-            <br />
-            <input onclick="clearDisplay()" type="button" value="C" />
-            <input onclick="addToDisplay('0')" type="button" value="0" />
-            <input onclick="calculate()" type="button" value="=" />
-            <input onclick="addToDisplay('+')" type="button" value="+" />
-        </div>
-        <div class="history">
-            <h3>
-                History
-            </h3>
-            <ul id="historyList">
-            </ul>
+        <div class="container">
+            <div class="calculator">
+                <h2>
+                    Basic Calculator
+                </h2>
+                <input disabled id="display" type="text" />
+                <button onclick="addToDisplay('1')">
+                    1
+                </button>
+                <button onclick="addToDisplay('2')">
+                    2
+                </button>
+                <button onclick="addToDisplay('3')">
+                    3
+                </button>
+                <button onclick="addToDisplay('+')">
+                    +
+                </button>
+                <button onclick="addToDisplay('4')">
+                    4
+                </button>
+                <button onclick="addToDisplay('5')">
+                    5
+                </button>
+                <button onclick="addToDisplay('6')">
+                    6
+                </button>
+                <button onclick="addToDisplay('-')">
+                    -
+                </button>
+                <button onclick="addToDisplay('7')">
+                    7
+                </button>
+                <button onclick="addToDisplay('8')">
+                    8
+                </button>
+                <button onclick="addToDisplay('9')">
+                    9
+                </button>
+                <button onclick="addToDisplay('*')">
+                    *
+                </button>
+                <button onclick="addToDisplay('C')">
+                    C
+                </button>
+                <button onclick="addToDisplay('0')">
+                    0
+                </button>
+                <button onclick="addToDisplay('/')">
+                    /
+                </button>
+                <button onclick="calculate()">
+                    =
+                </button>
+            </div>
+            <div class="history">
+                <h3>
+                    Calculation History
+                </h3>
+                <ul class="history-list" id="historyList">
+                </ul>
+                <button class="btn btn-danger" onclick="clearHistory()">
+                    Clear History
+                </button>
+            </div>
         </div>
     </body>
 </html>
