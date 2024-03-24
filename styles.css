@@ -1,7 +1,10 @@
-* {
+/* Reset margin and padding for all elements */
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
+  box-sizing: inherit;
 }
 
 /* Global styles */
@@ -14,6 +17,7 @@
   --main-btn-hover-opacity: 0.7;
   --main-btn-transition: background-color 0.3s ease;
   --main-border-radius: 5px;
+  --main-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
 body {
@@ -29,20 +33,25 @@ body {
   transition: background-color 0.5s ease, color 0.5s ease;
 }
 
+body.dark-mode {
+  --main-bg-color: #333;
+  --main-text-color: #fff;
+}
+
 #calculator {
-  display: flex; /* Make layout more flexible */
-  flex-direction: column; /* Stack elements vertically */
-  align-items: center; /* Center elements in column */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   padding: 20px;
   background-color: #fff;
   border-radius: var(--main-border-radius);
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: var(--main-shadow);
 }
 
 [role="group"] {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1rem; /* easy to increase or decrease size */
+  gap: 1rem;
 }
 
 input[type="text"] {
@@ -50,26 +59,27 @@ input[type="text"] {
   padding: 10px;
   margin-bottom: 20px;
   border: 0.125rem solid #666;
-  border-radius: var(
-    --main-border-radius
-  ); /* Larger radius gives the text field a rounder look */
+  border-radius: var(--main-border-radius);
   font-size: 1.2em;
   box-sizing: border-box;
 }
 
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px var(--main-btn-bg-color);
+}
+
 button {
-  display: flex; /* Use Flexbox layout for buttons, too */
-  justify-content: center; /* Center button content horizontally */
-  align-items: center; /* Center button content vertically */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   padding: 15px 25px;
   background-color: var(--main-btn-bg-color);
   color: var(--main-btn-text-color);
   border: none;
   border-radius: var(--main-border-radius);
   cursor: pointer;
-  transition: var(
-    --main-btn-transition
-  ); /* Use transitions for smoother color change */
+  transition: var(--main-btn-transition);
 }
 
 button:hover,
@@ -78,21 +88,4 @@ button:active,
 .operator-btn:hover,
 .operator-btn:active {
   opacity: var(--main-btn-hover-opacity);
-}
 
-body.dark-mode {
-  background-color: #333;
-  color: #fff;
-}
-
-body.dark-mode #calculator {
-  background-color: #595959;
-}
-
-body.dark-mode input[type="text"],
-body.dark-mode #historyDialog body.dark-mode button,
-body.dark-mode .operator-btn,
-body.dark-mode #historyDialog button {
-  background-color: #484848;
-  color: #e0e0e0; /* Lighten font colors for improved readability */
-}
