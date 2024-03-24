@@ -3,20 +3,22 @@ const calcHistory = [];
 
 const display = document.getElementById("display");
 const historyContent = document.getElementById("historyContent");
+const historyDialog = document.getElementById("historyDialog");
 
 function openHistory() {
-  const historyDialog = document.getElementById("historyDialog");
-  historyDialog.removeAttribute("hidden");
+  historyDialog.showModal();
   activeElementBeforeDialog = document.activeElement;
-  historyDialog.focus();
-  historyContent.textContent = calcHistory.join("\n");
-  trapFocus(historyDialog);
+  historyDialog.querySelector('button[autofocus]').focus();
+  updateHistory();
 }
 
 function closeHistory() {
-  const historyDialog = document.getElementById("historyDialog");
-  historyDialog.setAttribute("hidden", "");
+  historyDialog.close();
   activeElementBeforeDialog && activeElementBeforeDialog.focus();
+}
+
+function updateHistory() {
+  historyContent.textContent = calcHistory.join("\n");
 }
 
 function trapFocus(element) {
@@ -53,6 +55,7 @@ function appendToDisplay(input) {
   }
   display.value += input;
 }
+
 function handleError(_error) {
   // Set a standard error message
   display.value = "Error: Incomplete Expression";
@@ -63,30 +66,30 @@ function clearDisplay() {
 }
 
 function calculate() {
-  const equation = display.value;
+  const equation = display.value.trim();
+  if (/[+\-*/%]$/.test(equation)) {
+    handleError("Incomplete expression - please enter a number after the operator.");
+    return;
+  }
   try {
-    if (/[+\-*/%]$/.test(equation.trim())) {
-      throw new Error(
-        "Incomplete expression - please enter a number after the operator."
-      );
-    }
-    const result = math.evaluate(equation); // Using math.js library's evaluate function
+    const result = math.evaluate(equation);
     if (Number.isNaN(result) || !isFinite(result)) {
       if (equation.includes("/0")) {
-        throw new Error("Division by zero is not possible - please try again.");
+        handleError("Division by zero is not possible - please try again.");
       } else {
-        throw new Error("Invalid calculation - please try again.");
+        handleError("Invalid calculation - please try again.");
       }
+      return;
     }
     display.value = result;
     calcHistory.push(equation + " = " + result);
     saveHistory();
-    historyContent.setAttribute("aria-live", "polite");
-    historyContent.textContent = calcHistory.join("\n");
+    updateHistory();
   } catch (error) {
-    display.value = error.message; // Update the display with the error message
+    handleError(error.message);
   }
 }
+
 document
   .getElementById("darkModeToggle")
   .addEventListener("click", function () {
@@ -95,6 +98,7 @@ document
     this.setAttribute("aria-pressed", isDarkModeOn);
     this.blur();
   });
+
 function loadTheme() {
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
@@ -102,10 +106,15 @@ function loadTheme() {
 }
 
 loadTheme();
-function calculate() {
-  try {
-    display.value = math.evaluate(display.value);
-  } catch (error) {
-    handleError(error);
-  }
-}
+
+const math = {
+  evaluate: (expression) => {
+    try {
+      return eval(expression);
+    } catch (error) {
+      throw new Error("Invalid calculation - please try again.");
+    }
+  },
+};
+
+trapFocus(historyDialog);
