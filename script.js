@@ -40,6 +40,21 @@ function trapFocus(element) {
           e.preventDefault();
         }
       }
+    } else if (e.key === "Escape") {
+      if (e.target.closest("#historyDialog")) {
+        closeHistory();
+        e.stopPropagation();
+      }
+    } else if (e.key === "ArrowRight") {
+      if (e.target === lastFocusableEl && !e.shiftKey) {
+        firstFocusableEl.focus();
+        e.preventDefault();
+      }
+    } else if (e.key === "ArrowLeft") {
+      if (e.target === firstFocusableEl && e.shiftKey) {
+        lastFocusableEl.focus();
+        e.preventDefault();
+      }
     }
   });
 }
@@ -56,9 +71,9 @@ function appendToDisplay(input) {
   display.value += input;
 }
 
-function handleError(_error) {
+function handleError(error) {
   // Set a standard error message
-  display.value = "Error: Incomplete Expression";
+  display.value = `Error: ${error.message || "Incomplete Expression"}`;
 }
 
 function clearDisplay() {
@@ -86,17 +101,17 @@ function calculate() {
     saveHistory();
     updateHistory();
   } catch (error) {
-    handleError(error.message);
+    handleError(error);
   }
 }
 
 document
   .getElementById("darkModeToggle")
-  .addEventListener("click", function () {
+  .addEventListener("click", function (e) {
     const isDarkModeOn = document.body.classList.toggle("dark-mode");
     localStorage.setItem("theme", isDarkModeOn ? "dark" : "light");
-    this.setAttribute("aria-pressed", isDarkModeOn);
-    this.blur();
+    e.target.setAttribute("aria-pressed", isDarkModeOn);
+    e.target.blur();
   });
 
 function loadTheme() {
@@ -118,3 +133,12 @@ const math = {
 };
 
 trapFocus(historyDialog);
+
+document.getElementById("historyDialog").addEventListener("click", (e) => {
+  if (e.key === "Enter") {
+    calculate();
+    e.target.blur();
+  }
+});
+
+document.getElementById("historyDialog").addEventListener("keydown", (e) => {
