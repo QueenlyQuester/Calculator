@@ -40,6 +40,12 @@ function trapFocus(element) {
       }
     }
   });
+  element.addEventListener("focusin", function (e) {
+    if (e.target === lastFocusableEl && e.shiftKey) {
+      firstFocusableEl.focus();
+      e.preventDefault();
+    }
+  });
 }
 
 function saveHistory() {
@@ -53,6 +59,7 @@ function appendToDisplay(input) {
   }
   display.value += input;
 }
+
 function handleError(_error) {
   // Set a standard error message
   display.value = "Error: Incomplete Expression";
@@ -63,9 +70,12 @@ function clearDisplay() {
 }
 
 function calculate() {
-  const equation = display.value;
+  const equation = display.value.trim();
+  if (equation === "") {
+    return;
+  }
   try {
-    if (/[+\-*/%]$/.test(equation.trim())) {
+    if (/[+\-*/%]$/.test(equation)) {
       throw new Error(
         "Incomplete expression - please enter a number after the operator."
       );
@@ -85,8 +95,10 @@ function calculate() {
     historyContent.textContent = calcHistory.join("\n");
   } catch (error) {
     display.value = error.message; // Update the display with the error message
+    historyContent.textContent = calcHistory.join("\n");
   }
 }
+
 document
   .getElementById("darkModeToggle")
   .addEventListener("click", function () {
@@ -95,6 +107,7 @@ document
     this.setAttribute("aria-pressed", isDarkModeOn);
     this.blur();
   });
+
 function loadTheme() {
   if (localStorage.getItem("theme") === "dark") {
     document.body.classList.add("dark-mode");
@@ -102,10 +115,18 @@ function loadTheme() {
 }
 
 loadTheme();
-function calculate() {
-  try {
-    display.value = math.evaluate(display.value);
-  } catch (error) {
-    handleError(error);
-  }
-}
+
+document.addEventListener("DOMContentLoaded", function () {
+  const buttons = document.querySelectorAll("#calculator button");
+  buttons.forEach(function (button) {
+    button.addEventListener("click", function (event) {
+      const buttonValue = event.target.textContent;
+      // Validate and sanitize user input before processing it
+      if (buttonValue === "C") {
+        clearDisplay();
+      } else {
+        appendToDisplay(buttonValue);
+      }
+    });
+  });
+});
