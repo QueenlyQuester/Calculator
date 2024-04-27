@@ -3,20 +3,22 @@ const calcHistory = [];
 
 const display = document.getElementById("display");
 const historyContent = document.getElementById("historyContent");
+const historyDialog = document.getElementById("historyDialog");
 
 function openHistory() {
-  const historyDialog = document.getElementById("historyDialog");
-  historyDialog.removeAttribute("hidden");
+  historyDialog.showModal();
   activeElementBeforeDialog = document.activeElement;
-  historyDialog.focus();
-  historyContent.textContent = calcHistory.join("\n");
-  trapFocus(historyDialog);
+  historyDialog.querySelector("button[autofocus]").focus();
+  updateHistory();
 }
 
 function closeHistory() {
-  const historyDialog = document.getElementById("historyDialog");
-  historyDialog.setAttribute("hidden", "");
+  historyDialog.close();
   activeElementBeforeDialog && activeElementBeforeDialog.focus();
+}
+
+function updateHistory() {
+  historyContent.textContent = calcHistory.join("\n");
 }
 
 function trapFocus(element) {
@@ -37,6 +39,21 @@ function trapFocus(element) {
           firstFocusableEl.focus();
           e.preventDefault();
         }
+      }
+    } else if (e.key === "Escape") {
+      if (e.target.closest("#historyDialog")) {
+        closeHistory();
+        e.stopPropagation();
+      }
+    } else if (e.key === "ArrowRight") {
+      if (e.target === lastFocusableEl && !e.shiftKey) {
+        firstFocusableEl.focus();
+        e.preventDefault();
+      }
+    } else if (e.key === "ArrowLeft") {
+      if (e.target === firstFocusableEl && e.shiftKey) {
+        lastFocusableEl.focus();
+        e.preventDefault();
       }
     }
   });
@@ -59,10 +76,9 @@ function appendToDisplay(input) {
   }
   display.value += input;
 }
-
 function handleError(_error) {
   // Set a standard error message
-  display.value = "Error: Incomplete Expression";
+  display.value = `Error: ${error.message || "Incomplete Expression"}`;
 }
 
 function clearDisplay() {
@@ -70,12 +86,9 @@ function clearDisplay() {
 }
 
 function calculate() {
-  const equation = display.value.trim();
-  if (equation === "") {
-    return;
-  }
+  const equation = display.value;
   try {
-    if (/[+\-*/%]$/.test(equation)) {
+    if (/[+\-*/%]$/.test(equation.trim())) {
       throw new Error(
         "Incomplete expression - please enter a number after the operator."
       );
@@ -83,29 +96,28 @@ function calculate() {
     const result = math.evaluate(equation); // Using math.js library's evaluate function
     if (Number.isNaN(result) || !isFinite(result)) {
       if (equation.includes("/0")) {
-        throw new Error("Division by zero is not possible - please try again.");
+        handleError("Division by zero is not possible - please try again.");
       } else {
-        throw new Error("Invalid calculation - please try again.");
+        handleError("Invalid calculation - please try again.");
       }
+      return;
     }
     display.value = result;
     calcHistory.push(equation + " = " + result);
     saveHistory();
-    historyContent.setAttribute("aria-live", "polite");
-    historyContent.textContent = calcHistory.join("\n");
+    updateHistory();
   } catch (error) {
     display.value = error.message; // Update the display with the error message
-    historyContent.textContent = calcHistory.join("\n");
   }
 }
 
 document
   .getElementById("darkModeToggle")
-  .addEventListener("click", function () {
+  .addEventListener("click", function (e) {
     const isDarkModeOn = document.body.classList.toggle("dark-mode");
     localStorage.setItem("theme", isDarkModeOn ? "dark" : "light");
-    this.setAttribute("aria-pressed", isDarkModeOn);
-    this.blur();
+    e.target.setAttribute("aria-pressed", isDarkModeOn);
+    e.target.blur();
   });
 
 function loadTheme() {
@@ -115,18 +127,10 @@ function loadTheme() {
 }
 
 loadTheme();
-
-document.addEventListener("DOMContentLoaded", function () {
-  const buttons = document.querySelectorAll("#calculator button");
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function (event) {
-      const buttonValue = event.target.textContent;
-      // Validate and sanitize user input before processing it
-      if (buttonValue === "C") {
-        clearDisplay();
-      } else {
-        appendToDisplay(buttonValue);
-      }
-    });
-  });
-});
+function calculate() {
+  try {
+    display.value = math.evaluate(display.value);
+  } catch (error) {
+    handleError(error);
+  }
+}
