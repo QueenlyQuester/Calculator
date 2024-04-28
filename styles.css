@@ -1,64 +1,92 @@
-/* Focus states */
-button:focus,
-input[type="text"]:focus {
-  outline: none;
-  box-shadow: 0 0 5px 2px var(--focus-color);
+:root {
+  --color-text-main: #333;
+  --color-btn-bg-main: #4caf50; /* Green */
+  --color-btn-text-main: #fff; /* White */
+  --opacity-btn-hover-main: 0.8;
+  --transition-btn-main: 0.3s;
+  --color-focus: #666;
+  --color-bg-main: #f0f0f0; /* Light gray */
+  --margin-button: 5px;
+  --width-button: calc((100% - 20px) / 4);
+  --color-bg-dark: #333; /* Dark gray */
+  --color-text-dark: #fff; /* White */
 }
 
-/* Button hover effect */
+button {
+  background-color: var(--color-btn-bg-main);
+  border: none;
+  color: var(--color-btn-text-main);
+  cursor: pointer;
+  font-size: 0.8rem; /* Smaller font size */
+  margin: var(--margin-button);
+  padding: 5px 10px; /* Smaller padding */
+  transition: var(--transition-btn-main);
+  width: var(--width-button);
+}
+
 button:hover,
 button:active {
-  opacity: var(--main-btn-hover-opacity);
+  opacity: var(--opacity-btn-hover-main);
 }
 
-/* Accessible text color */
-body {
-  color: var(--main-text-color);
-}
-
-/* Improvements on button styles */
-button {
-  background-color: var(--main-btn-bg-color);
-  border: none;
-  color: var(--main-btn-text-color);
-  cursor: pointer;
-  font-size: 1rem;
-  padding: 10px 20px;
-  transition: var(--main-btn-transition);
-}
-
-/* Operator buttons */
 .operator-btn {
   border: none;
-  color: var(--main-btn-text-color);
+  color: var(--color-btn-text-main);
 }
 
-/* Screen */
 #display {
-  font-size: 2rem;
-  background-color: var(--main-bg-color);
+  font-size: 1.5rem; /* Smaller font size */
+  background-color: var(--color-bg-main);
   border: none;
   text-align: right;
   padding: 10px;
   width: 100%;
-  color: var(--main-text-color);
+  color: var(--color-text-main);
 }
 
-/* Extra */
 .dark-mode {
   transition: all 0.5s;
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-dark);
 }
 
-/* Dark mode toggle button */
 #darkModeToggle {
   position: fixed;
   top: 10px;
   right: 10px;
   padding: 10px;
   font-size: 1.2rem;
+  background-color: var(--color-btn-bg-main);
+  color: var(--color-btn-text-main);
 }
 
-/* Improvements on Grid for Calculator Buttons */
 [role="group"] {
+  display: flex;
+  flex-wrap: wrap;
   gap: 10px;
+  justify-content: center;
+  margin: 20px; /* Add margin to center the buttons */
+}
+
+button:focus,
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px var(--color-focus);
+}
+
+/* Add some color to the buttons */
+button:nth-child(1) {
+  background-color: #ff69b4; /* Pink */
+}
+
+button:nth-child(2) {
+  background-color: #33cc33; /* Green */
+}
+
+button:nth-child(3) {
+  background-color: #66cccc; /* Blue */
+}
+
+button:nth-child(4) {
+  background-color: #ffcc00; /* Yellow */
 }

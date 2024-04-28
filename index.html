@@ -9,8 +9,10 @@
             content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self';">
     </head>
     <body>
-        <button id="darkModeToggle" aria-label="Toggle Dark Mode">Toggle Dark
-            Mode</button>
+        <header>
+            <button id="darkModeToggle" aria-label="Toggle Dark Mode">Toggle
+                Dark Mode</button>
+        </header>
         <main>
             <div id="calculator">
                 <input id="display" type="text" aria-label="Calculator display"
@@ -21,7 +23,7 @@
                         onclick="clearDisplay()">C</button>
                     <button tabindex="0" aria-label="Seven"
                         onclick="appendToDisplay('7')">7</button>
-                    <button tabindex="0" aria-label="Eight"
+                    <buttontabindex="0" aria-label="Eight"
                         onclick="appendToDisplay('8')">8</button>
                     <button tabindex="0" aria-label="Nine"
                         onclick="appendToDisplay('9')">9</button>
@@ -57,19 +59,17 @@
                     <button tabindex="0" class="operator-btn"
                         aria-label="Percentage"
                         onclick="appendToDisplay('%')">%</button>
-                    <div id="historyDialog" role="dialog"
-                        aria-modal="true" aria-labelledby="historyDialogTitle"
-                        hidden onclick="openHistory()">
-                        <h2 id="historyDialogTitle">Calculation History</h2>
-                        <div id="historyContent" role="document"
-                            aria-live="polite"
-                            aria-atomic="true"></div>
-                        <button id="closeHistoryButton" onclick="closeHistory()"
-                            aria-label="Close History">Close</button>
-                    </div>
                 </div>
             </div>
         </main>
+        <dialog id="historyDialog" role="dialog" aria-modal="true"
+            aria-labelledby="historyDialogTitle" hidden>
+            <h2 id="historyDialogTitle">Calculation History</h2>
+            <div id="historyContent" role="document" aria-live="polite"
+                aria-atomic="true"></div>
+            <button id="closeHistoryButton" onclick="closeHistory()"
+                aria-label="Close History">Close</button>
+        </dialog>
         <script async
             src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.4.0/math.js"></script>
         <script async src="script.js"></script>
