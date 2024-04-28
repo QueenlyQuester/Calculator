@@ -1,65 +1,64 @@
-/* Reset margin and padding for all elements */
-html,
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
+/* Focus states */
+button:focus,
+input[type="text"]:focus {
+  outline: none;
+  box-shadow: 0 0 5px 2px var(--focus-color);
 }
 
-/* Global styles */
-:root {
-  --main-font: Arial, sans-serif;
-  --main-bg-color: #f0f0f0;
-  --main-text-color: #333;
-  --main-btn-bg-color: #2b2b2b;
-  --main-btn-text-color: #fff;
-  --main-btn-hover-opacity: 0.7;
-  --main-btn-transition: background-color 0.3s ease;
-  --main-border-radius: 5px;
-  --main-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  --dark-mode-bg-color: #333;
-  --dark-mode-text-color: #fff;
+/* Button hover effect */
+button:hover,
+button:active {
+  opacity: var(--main-btn-hover-opacity);
 }
 
+/* Accessible text color */
 body {
-  font-family: var(--main-font);
-  background-color: var(--main-bg-color);
   color: var(--main-text-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-size: 18px;
-  line-height: 150%; /* Make text easier to read */
-  transition: background-color 0.5s ease, color 0.5s ease;
 }
 
-body.dark-mode {
-  background-color: var(--dark-mode-bg-color);
-  color: var(--dark-mode-text-color);
+/* Improvements on button styles */
+button {
+  background-color: var(--main-btn-bg-color);
+  border: none;
+  color: var(--main-btn-text-color);
+  cursor: pointer;
+  font-size: 1rem;
+  padding: 10px 20px;
+  transition: var(--main-btn-transition);
 }
 
-#calculator {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-  background-color: #fff;
-  border-radius: var(--main-border-radius);
-  box-shadow: var(--main-shadow);
+/* Operator buttons */
+.operator-btn {
+  border: none;
+  color: var(--main-btn-text-color);
 }
 
-[role="group"] {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
-}
-
-.screen {
-  width: 100%;
+/* Screen */
+#display {
+  font-size: 2rem;
+  background-color: var(--main-bg-color);
+  border: none;
+  text-align: right;
   padding: 10px;
-  margin-bottom: 20px;
-  border: 0.125rem solid #666;
-  border-radius: var
+  width: 100%;
+  color: var(--main-text-color);
+}
+
+/* Extra */
+.dark-mode {
+  transition: all 0.5s;
+}
+
+/* Dark mode toggle button */
+#darkModeToggle {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  padding: 10px;
+  font-size: 1.2rem;
+}
+
+/* Improvements on Grid for Calculator Buttons */
+[role="group"] {
+  gap: 10px;
+}

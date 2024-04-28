@@ -57,15 +57,16 @@
                     <button tabindex="0" class="operator-btn"
                         aria-label="Percentage"
                         onclick="appendToDisplay('%')">%</button>
-                    <a tabindex="0" id="historyDialog" role="dialog"
+                    <div id="historyDialog" role="dialog"
                         aria-modal="true" aria-labelledby="historyDialogTitle"
                         hidden onclick="openHistory()">
                         <h2 id="historyDialogTitle">Calculation History</h2>
-                        <div id="historyContent" aria-live="polite"
+                        <div id="historyContent" role="document"
+                            aria-live="polite"
                             aria-atomic="true"></div>
-                        <button onclick="closeHistory()"
+                        <button id="closeHistoryButton" onclick="closeHistory()"
                             aria-label="Close History">Close</button>
-                    </a>
+                    </div>
                 </div>
             </div>
         </main>

@@ -76,7 +76,8 @@ function appendToDisplay(input) {
   }
   display.value += input;
 }
-function handleError(_error) {
+
+function handleError(error) {
   // Set a standard error message
   display.value = `Error: ${error.message || "Incomplete Expression"}`;
 }
@@ -127,10 +128,3 @@ function loadTheme() {
 }
 
 loadTheme();
-function calculate() {
-  try {
-    display.value = math.evaluate(display.value);
-  } catch (error) {
-    handleError(error);
-  }
-}
