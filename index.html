@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
     <head>
         <meta charset="UTF-8">
@@ -7,38 +7,51 @@
         <link rel="stylesheet" href="styles.css">
     </head>
     <body>
-        <div class="calculator">
-            <input type="text" id="display" class="display" readonly>
-            <div class="button-container">
-                <button class="button" id="clear">C</button>
-                <button class="button" id="backspace">←</button>
-                <button class="button operator" id="divide">/</button>
-                <button class="button" id="7">7</button>
-                <button class="button" id="8">8</button>
-                <button class="button" id="9">9</button>
-                <button class="button operator" id="multiply">*</button>
-                <button class="button" id="4">4</button>
-                <button class="button" id="5">5</button>
-                <button class="button" id="6">6</button>
-                <button class="button operator" id="subtract">-</button>
-                <button class="button" id="1">1</button>
-                <button class="button" id="2">2</button>
-                <button class="button" id="3">3</button>
-                <button class="button operator" id="add">+</button>
-                <button class="button" id="0">0</button>
-                <button class="button" id="decimal">.</button>
-                <button class="button operator" id="equals">=</button>
+        <header>
+            <h1>Calculator App</h1>
+        </header>
+        <main>
+            <div class="calculator">
+                <input type="text" id="display" class="display" readonly
+                    aria-label="Calculator display">
+                <div class="button-container">
+                    <button class="button" aria-label="Clear">C</button>
+                    <button class="button" aria-label="Backspace">←</button>
+                    <button class="button operator"
+                        aria-label="Divide">/</button>
+                    <button class="button" aria-label="7">7</button>
+                    <button class="button" aria-label="8">8</button>
+                    <button class="button" aria-label="9">9</button>
+                    <button class="button operator"
+                        aria-label="Multiply">*</button>
+                    <button class="button" aria-label="4">4</button>
+                    <button class="button" aria-label="5">5</button>
+                    <button class="button" aria-label="6">6</button>
+                    <button class="button operator"
+                        aria-label="Subtract">-</button>
+                    <button class="button" aria-label="1">1</button>
+                    <button class="button" aria-label="2">2</button>
+                    <button class="button" aria-label="3">3</button>
+                    <button class="button operator" aria-label="Add">+</button>
+                    <button class="button" aria-label="0">0</button>
+                    <button class="button" aria-label="Decimal">.</button>
+                    <button class="button operator"
+                        aria-label="Equals">=</button>
+                </div>
             </div>
-        </div>
-        <div class="theme-switcher">
-            <input type="radio" name="theme" id="light-theme" checked>
-            <label for="light-theme"></label>
-            <input type="radio" name="theme" id="dark-theme">
-            <label for="dark-theme"></label>
-        </div>
-        <div class="history-log">
-            <ul id="history-log-list"></ul>
-        </div>
+            <div class="theme-switcher">
+                <input type="radio" name="theme" id="light-theme" checked
+                    aria-label="Light theme">
+                <label for="light-theme"></label>
+                <input type="radio" name="theme" id="dark-theme"
+                    aria-label="Dark theme">
+                <label for="dark-theme"></label>
+            </div>
+            <div class="history-log">
+                <ul id="history-log-list"
+                    aria-label="Calculator history log"></ul>
+            </div>
+        </main>
         <script src="script.js"></script>
     </body>
 </html>

@@ -58,6 +58,7 @@ function clearDisplay() {
   result = "";
   history.length = 0;
   historyLogList.innerHTML = "";
+  updateHistoryLog();
 }
 
 function removeLastCharacter() {
@@ -65,6 +66,14 @@ function removeLastCharacter() {
 }
 
 function calculateResult() {
+  const validExpressionRegex = /^[-+*/0-9().]+$/; // Regular expression to validate the expression
+
+  if (!validExpressionRegex.test(currentOperation)) {
+    display.value = "Invalid Input";
+    currentOperation = ""; // Clear the currentOperation variable
+    return;
+  }
+
   try {
     const operationFunction = new Function(
       "currentOperation",
@@ -73,7 +82,7 @@ function calculateResult() {
     result = operationFunction(currentOperation);
     display.value = result;
     previousOperation = display.value;
-    history.push(`${previousOperation} = ${result}`);
+    history.push(`${currentOperation} = ${result}`); // Push the full expression to the history array
     if (history.length > 10) {
       history.shift();
     }
@@ -104,7 +113,9 @@ function appendToCurrentOperation(text) {
 }
 
 function handleOperatorButton(text) {
-  if (currentOperation === "") {
+  if (previousOperation !== "") {
+    appendToCurrentOperation(previousOperation + text);
+  } else if (currentOperation === "") {
     appendToCurrentOperation(text);
   } else {
     const lastCharacter = currentOperation[currentOperation.length - 1];
@@ -120,9 +131,10 @@ function handleOperatorButton(text) {
 }
 
 function handleNumberButton(text) {
-  if (text === "-" && (currentOperation === "" || isLastCharacterOperator())) {
-    appendToCurrentOperation(text);
+  if (text === "-" && isLastCharacterOperator()) {
+    return;
   }
+  appendToCurrentOperation(text);
 }
 
 function isLastCharacterOperator() {
