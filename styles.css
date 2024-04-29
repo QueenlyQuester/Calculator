@@ -3,7 +3,8 @@ body {
   background-color: #f0f0f0;
 }
 .calculator {
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
   margin: 40px auto;
   padding: 20px;
   background-color: #fff;
@@ -72,7 +73,8 @@ body {
   background-color: #4caf50;
 }
 .history-log {
-  width: 250px;
+  width: 100%;
+  max-width: 250px;
   margin: 40px auto;
   padding: 20px;
   background-color: #fff;
@@ -93,4 +95,24 @@ body {
 }
 .history-log li:last-child {
   border-bottom: none;
+}
+@media (max-width: 480px) {
+  .calculator {
+    max-width: 100%;
+  }
+  .display {
+    font-size: 18px;
+  }
+  .button {
+    font-size: 14px;
+  }
+  .operator {
+    font-size: 14px;
+  }
+  .theme-switcher {
+    bottom: 10px;
+  }
+  .history-log {
+    max-width: 100%;
+  }
 }
