@@ -19,6 +19,9 @@ buttons.forEach((button) => {
       case "=":
         calculateResult();
         break;
+      case ".":
+        handleDecimalButton();
+        break;
       case "±":
         toggleSign();
         break;
@@ -63,8 +66,11 @@ function removeLastCharacter() {
 
 function calculateResult() {
   try {
-    const operationFunction = new Function("return " + currentOperation);
-    result = operationFunction();
+    const operationFunction = new Function(
+      "currentOperation",
+      "return " + currentOperation
+    );
+    result = operationFunction(currentOperation);
     display.value = result;
     previousOperation = display.value;
     history.push(`${previousOperation} = ${result}`);
@@ -72,14 +78,24 @@ function calculateResult() {
       history.shift();
     }
     updateHistoryLog();
+    currentOperation = ""; // Clear the currentOperation variable
   } catch (error) {
     display.value = "Error";
+    currentOperation = ""; // Clear the currentOperation variable
   }
 }
 
 function toggleSign() {
-  currentOperation = currentOperation.replace(/-/g, "+").replace(/\+/g, "-");
-  display.value = currentOperation;
+  if (currentOperation === "") {
+    appendToCurrentOperation("-");
+  } else {
+    const lastCharacter = currentOperation[currentOperation.length - 1];
+    if (isLastCharacterOperator() || lastCharacter === "(") {
+      appendToCurrentOperation("-");
+    } else {
+      appendToCurrentOperation("+");
+    }
+  }
 }
 
 function appendToCurrentOperation(text) {
@@ -106,8 +122,6 @@ function handleOperatorButton(text) {
 function handleNumberButton(text) {
   if (text === "-" && (currentOperation === "" || isLastCharacterOperator())) {
     appendToCurrentOperation(text);
-  } else {
-    appendToCurrentOperation(text);
   }
 }
 
@@ -123,11 +137,13 @@ function isLastCharacterOperator() {
 
 function updateHistoryLog() {
   historyLogList.innerHTML = "";
-  history.forEach((item) => {
-    const historyItem = document.createElement("li");
-    historyItem.textContent = item;
-    historyLogList.appendChild(historyItem);
-  });
+  if (history.length > 0) {
+    history.forEach((item) => {
+      const historyItem = document.createElement("li");
+      historyItem.textContent = item;
+      historyLogList.appendChild(historyItem);
+    });
+  }
 }
 
 function setDarkTheme() {
@@ -157,4 +173,10 @@ function setLightTheme() {
   });
   document.querySelector(".history-log").style.backgroundColor = "#fff";
   document.querySelector(".history-log ul").style.backgroundColor = "#f0f0f0";
+}
+
+function handleDecimalButton() {
+  if (!currentOperation.includes(".")) {
+    appendToCurrentOperation(".");
+  }
 }
