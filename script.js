@@ -1,127 +1,160 @@
-let display = document.getElementById("display");
-let buttons = document.querySelectorAll(".button");
+const display = document.getElementById("display");
+const buttons = document.querySelectorAll(".button");
 let currentOperation = "";
 let previousOperation = "";
 let result = "";
-let historyLogList = document.getElementById("history-log-list");
-let history = [];
+const historyLogList = document.getElementById("history-log-list");
+const history = [];
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
-    let buttonText = button.textContent;
+    const buttonText = button.textContent;
     switch (buttonText) {
       case "C":
-        display.value = "";
-        currentOperation = "";
-        previousOperation = "";
-        result = "";
-        history = [];
-        historyLogList.innerHTML = "";
+        clearDisplay();
         break;
       case "←":
-        display.value = display.value.slice(0, -1);
+        removeLastCharacter();
         break;
       case "=":
-        try {
-          const operationFunction = new Function("return " + currentOperation);
-          result = operationFunction();
-          display.value = result;
-          currentOperation = "";
-          previousOperation = display.value;
-          history.push(`${previousOperation} = ${result}`);
-          if (history.length > 10) {
-            history.shift();
-          }
-          historyLogList.innerHTML = "";
-          history.forEach((item) => {
-            let historyItem = document.createElement("li");
-            historyItem.textContent = item;
-            historyLogList.appendChild(historyItem);
-          });
-        } catch (error) {
-          display.value = "Error";
-        }
+        calculateResult();
         break;
       case "±":
-        currentOperation = currentOperation
-          .replace(/-/g, "+")
-          .replace(/+/g, "-");
-        display.value = currentOperation;
+        toggleSign();
         break;
       case "(":
-        currentOperation += "(";
-        display.value = currentOperation;
-        break;
       case ")":
-        currentOperation += ")";
-        display.value = currentOperation;
+        appendToCurrentOperation(buttonText);
         break;
       default:
         if (button.classList.contains("operator")) {
-          if (currentOperation === "") {
-            currentOperation += buttonText;
-            display.value = currentOperation;
-          } else if (
-            currentOperation[currentOperation.length - 1] !== "+" &&
-            currentOperation[currentOperation.length - 1] !== "-" &&
-            currentOperation[currentOperation.length - 1] !== "*" &&
-            currentOperation[currentOperation.length - 1] !== "/"
-            // deepcode ignore DuplicateIfBody: <please specify a reason of ignoring this>
-          ) {
-            currentOperation += buttonText;
-            display.value = currentOperation;
-          }
+          handleOperatorButton(buttonText);
         } else {
-          if (
-            buttonText === "-" &&
-            (currentOperation === "" ||
-              currentOperation[currentOperation.length - 1] === "+" ||
-              currentOperation[currentOperation.length - 1] === "-" ||
-              currentOperation[currentOperation.length - 1] === "*" ||
-              currentOperation[currentOperation.length - 1] === "/")
-          ) {
-            currentOperation += buttonText;
-            display.value = currentOperation;
-            // deepcode ignore DuplicateIfBody: <please specify a reason of ignoring this>
-          } else {
-            currentOperation += buttonText;
-            display.value = currentOperation;
-          }
+          handleNumberButton(buttonText);
         }
     }
   });
 });
 
-let themeSwitcher = document.querySelector(".theme-switcher");
-let lightTheme = document.querySelector("#light-theme");
-let darkTheme = document.querySelector("#dark-theme");
+const themeSwitcher = document.querySelector(".theme-switcher");
+const lightTheme = document.querySelector("#light-theme");
+const darkTheme = document.querySelector("#dark-theme");
 
 themeSwitcher.addEventListener("click", () => {
   if (darkTheme.checked) {
-    document.body.style.backgroundColor = "#333";
-    document.querySelector(".calculator").style.backgroundColor = "#444";
-    document.querySelector(".calculator .display").style.backgroundColor =
-      "#555";
-    document.querySelectorAll(".button").forEach((button) => {
-      button.style.backgroundColor = "#666";
-    });
-    document.querySelectorAll(".operator").forEach((operator) => {
-      operator.style.backgroundColor = "#777";
-    });
-    document.querySelector(".history-log").style.backgroundColor = "#444";
-    document.querySelector(".history-log ul").style.backgroundColor = "#555";
+    setDarkTheme();
   } else {
-    document.body.style.backgroundColor = "#f0f0f0";
-    document.querySelector(".calculator").style.backgroundColor = "#fff";
-    document.querySelector(".calculator .display").style.backgroundColor =
-      "#f0f0f0";
-    document.querySelectorAll(".button").forEach((button) => {
-      button.style.backgroundColor = "#4CAF50";
-    });
-    document.querySelectorAll(".operator").forEach((operator) => {
-      operator.style.backgroundColor = "#ff9800";
-    });
-    document.querySelector(".history-log").style.backgroundColor = "#fff";
-    document.querySelector(".history-log ul").style.backgroundColor = "#f0f0f0";
+    setLightTheme();
   }
 });
+
+function clearDisplay() {
+  display.value = "";
+  currentOperation = "";
+  previousOperation = "";
+  result = "";
+  history.length = 0;
+  historyLogList.innerHTML = "";
+}
+
+function removeLastCharacter() {
+  display.value = display.value.slice(0, -1);
+}
+
+function calculateResult() {
+  try {
+    const operationFunction = new Function("return " + currentOperation);
+    result = operationFunction();
+    display.value = result;
+    previousOperation = display.value;
+    history.push(`${previousOperation} = ${result}`);
+    if (history.length > 10) {
+      history.shift();
+    }
+    updateHistoryLog();
+  } catch (error) {
+    display.value = "Error";
+  }
+}
+
+function toggleSign() {
+  currentOperation = currentOperation.replace(/-/g, "+").replace(/\+/g, "-");
+  display.value = currentOperation;
+}
+
+function appendToCurrentOperation(text) {
+  currentOperation += text;
+  display.value = currentOperation;
+}
+
+function handleOperatorButton(text) {
+  if (currentOperation === "") {
+    appendToCurrentOperation(text);
+  } else {
+    const lastCharacter = currentOperation[currentOperation.length - 1];
+    if (
+      lastCharacter !== "+" &&
+      lastCharacter !== "-" &&
+      lastCharacter !== "*" &&
+      lastCharacter !== "/"
+    ) {
+      appendToCurrentOperation(text);
+    }
+  }
+}
+
+function handleNumberButton(text) {
+  if (text === "-" && (currentOperation === "" || isLastCharacterOperator())) {
+    appendToCurrentOperation(text);
+  } else {
+    appendToCurrentOperation(text);
+  }
+}
+
+function isLastCharacterOperator() {
+  const lastCharacter = currentOperation[currentOperation.length - 1];
+  return (
+    lastCharacter === "+" ||
+    lastCharacter === "-" ||
+    lastCharacter === "*" ||
+    lastCharacter === "/"
+  );
+}
+
+function updateHistoryLog() {
+  historyLogList.innerHTML = "";
+  history.forEach((item) => {
+    const historyItem = document.createElement("li");
+    historyItem.textContent = item;
+    historyLogList.appendChild(historyItem);
+  });
+}
+
+function setDarkTheme() {
+  document.body.style.backgroundColor = "#333";
+  document.querySelector(".calculator").style.backgroundColor = "#444";
+  document.querySelector(".calculator .display").style.backgroundColor = "#555";
+  document.querySelectorAll(".button").forEach((button) => {
+    button.style.backgroundColor = "#666";
+  });
+  document.querySelectorAll(".operator").forEach((operator) => {
+    operator.style.backgroundColor = "#777";
+  });
+  document.querySelector(".history-log").style.backgroundColor = "#444";
+  document.querySelector(".history-log ul").style.backgroundColor = "#555";
+}
+
+function setLightTheme() {
+  document.body.style.backgroundColor = "#f0f0f0";
+  document.querySelector(".calculator").style.backgroundColor = "#fff";
+  document.querySelector(".calculator .display").style.backgroundColor =
+    "#f0f0f0";
+  document.querySelectorAll(".button").forEach((button) => {
+    button.style.backgroundColor = "#4CAF50";
+  });
+  document.querySelectorAll(".operator").forEach((operator) => {
+    operator.style.backgroundColor = "#ff9800";
+  });
+  document.querySelector(".history-log").style.backgroundColor = "#fff";
+  document.querySelector(".history-log ul").style.backgroundColor = "#f0f0f0";
+}
