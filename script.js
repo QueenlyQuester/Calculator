@@ -4,6 +4,7 @@ let currentOperation = "";
 let previousOperation = "";
 let result = "";
 let historyLogList = document.getElementById("history-log-list");
+let history = [];
 
 buttons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -14,6 +15,8 @@ buttons.forEach((button) => {
         currentOperation = "";
         previousOperation = "";
         result = "";
+        history = [];
+        historyLogList.innerHTML = "";
         break;
       case "←":
         display.value = display.value.slice(0, -1);
@@ -24,9 +27,15 @@ buttons.forEach((button) => {
           display.value = result;
           currentOperation = "";
           previousOperation = "";
-          let historyItem = document.createElement("li");
-          historyItem.textContent = `${previousOperation} = ${result}`;
-          historyLogList.appendChild(historyItem);
+          history.push(`${previousOperation} = ${result}`);
+          if (history.length > 10) {
+            history.shift();
+          }
+          history.forEach((item) => {
+            let historyItem = document.createElement("li");
+            historyItem.textContent = item;
+            historyLogList.appendChild(historyItem);
+          });
         } catch (error) {
           display.value = "Error";
         }
