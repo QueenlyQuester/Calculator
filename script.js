@@ -23,10 +23,11 @@ buttons.forEach((button) => {
         break;
       case "=":
         try {
-          result = eval(currentOperation);
+          const operationFunction = new Function("return " + currentOperation);
+          result = operationFunction();
           display.value = result;
           currentOperation = "";
-          previousOperation = "";
+          previousOperation = display.value;
           history.push(`${previousOperation} = ${result}`);
           if (history.length > 10) {
             history.shift();
@@ -41,21 +42,49 @@ buttons.forEach((button) => {
           display.value = "Error";
         }
         break;
+      case "±":
+        currentOperation = currentOperation
+          .replace(/-/g, "+")
+          .replace(/+/g, "-");
+        display.value = currentOperation;
+        break;
+      case "(":
+        currentOperation += "(";
+        display.value = currentOperation;
+        break;
+      case ")":
+        currentOperation += ")";
+        display.value = currentOperation;
+        break;
       default:
         if (button.classList.contains("operator")) {
-          if (currentOperation !== "") {
+          if (currentOperation === "") {
             currentOperation += buttonText;
             display.value = currentOperation;
-          } else {
-            currentOperation = display.value + buttonText;
+          } else if (
+            currentOperation[currentOperation.length - 1] !== "+" &&
+            currentOperation[currentOperation.length - 1] !== "-" &&
+            currentOperation[currentOperation.length - 1] !== "*" &&
+            currentOperation[currentOperation.length - 1] !== "/"
+            // deepcode ignore DuplicateIfBody: <please specify a reason of ignoring this>
+          ) {
+            currentOperation += buttonText;
             display.value = currentOperation;
           }
         } else {
-          if (currentOperation !== "") {
+          if (
+            buttonText === "-" &&
+            (currentOperation === "" ||
+              currentOperation[currentOperation.length - 1] === "+" ||
+              currentOperation[currentOperation.length - 1] === "-" ||
+              currentOperation[currentOperation.length - 1] === "*" ||
+              currentOperation[currentOperation.length - 1] === "/")
+          ) {
             currentOperation += buttonText;
             display.value = currentOperation;
+            // deepcode ignore DuplicateIfBody: <please specify a reason of ignoring this>
           } else {
-            currentOperation = buttonText;
+            currentOperation += buttonText;
             display.value = currentOperation;
           }
         }
@@ -71,7 +100,8 @@ themeSwitcher.addEventListener("click", () => {
   if (darkTheme.checked) {
     document.body.style.backgroundColor = "#333";
     document.querySelector(".calculator").style.backgroundColor = "#444";
-    document.querySelector(".display").style.backgroundColor = "#555";
+    document.querySelector(".calculator .display").style.backgroundColor =
+      "#555";
     document.querySelectorAll(".button").forEach((button) => {
       button.style.backgroundColor = "#666";
     });
@@ -83,7 +113,8 @@ themeSwitcher.addEventListener("click", () => {
   } else {
     document.body.style.backgroundColor = "#f0f0f0";
     document.querySelector(".calculator").style.backgroundColor = "#fff";
-    document.querySelector(".display").style.backgroundColor = "#f0f0f0";
+    document.querySelector(".calculator .display").style.backgroundColor =
+      "#f0f0f0";
     document.querySelectorAll(".button").forEach((button) => {
       button.style.backgroundColor = "#4CAF50";
     });

@@ -41,9 +41,12 @@ body {
 }
 .operator {
   background-color: #ff9800;
+  color: #fff;
+  border: 1px solid #fff;
 }
 .operator:hover {
   background-color: #ff9900;
+  border: 1px solid #fff;
 }
 .theme-switcher {
   position: fixed;
