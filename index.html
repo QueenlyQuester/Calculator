@@ -3,75 +3,34 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Calculator App</title>
         <link rel="stylesheet" href="styles.css">
-        <title>Calculator | Aexter</title>
-        <meta http-equiv="Content-Security-Policy"
-            content="default-src 'self'; script-src 'self' https://cdnjs.cloudflare.com; style-src 'self';">
     </head>
     <body>
-        <header>
-            <button id="darkModeToggle" aria-label="Toggle Dark Mode">Toggle
-                Dark Mode</button>
-        </header>
-        <main>
-            <div id="calculator">
-                <input id="display" type="text" aria-label="Calculator display"
-                    readonly>
-                <div role="group" aria-label="Calculator buttons">
-                    <button tabindex="0" class="operator-btn clear-btn"
-                        id="clear-btn" aria-label="Clear"
-                        onclick="clearDisplay()">C</button>
-                    <button tabindex="0" aria-label="Seven"
-                        onclick="appendToDisplay('7')">7</button>
-                    <buttontabindex="0" aria-label="Eight"
-                        onclick="appendToDisplay('8')">8</button>
-                    <button tabindex="0" aria-label="Nine"
-                        onclick="appendToDisplay('9')">9</button>
-                    <button tabindex="0" class="operator-btn"
-                        aria-label="Subtract"
-                        onclick="appendToDisplay('-')">-</button>
-                    <button tabindex="0" aria-label="Four"
-                        onclick="appendToDisplay('4')">4</button>
-                    <button tabindex="0" aria-label="Five"
-                        onclick="appendToDisplay('5')">5</button>
-                    <button tabindex="0" aria-label="Six"
-                        onclick="appendToDisplay('6')">6</button>
-                    <button tabindex="0" class="operator-btn"
-                        aria-label="Multiply"
-                        onclick="appendToDisplay('*')">*</button>
-                    <button tabindex="0" aria-label="One"
-                        onclick="appendToDisplay('1')">1</button>
-                    <button tabindex="0" aria-label="Two"
-                        onclick="appendToDisplay('2')">2</button>
-                    <button tabindex="0" aria-label="Three"
-                        onclick="appendToDisplay('3')">3</button>
-                    <button tabindex="0" class="operator-btn" aria-label="Add"
-                        onclick="appendToDisplay('+')">+</button>
-                    <button tabindex="0" class="operator-btn"
-                        aria-label="Divide"
-                        onclick="appendToDisplay('/')">/</button>
-                    <button tabindex="0" aria-label="Zero"
-                        onclick="appendToDisplay('0')">0</button>
-                    <button tabindex="0" aria-label="Decimal"
-                        onclick="appendToDisplay('.')">.</button>
-                    <button tabindex="0" class="operator-btn"
-                        aria-label="Calculate" onclick="calculate()">=</button>
-                    <button tabindex="0" class="operator-btn"
-                        aria-label="Percentage"
-                        onclick="appendToDisplay('%')">%</button>
-                </div>
+        <div class="calculator">
+            <input type="text" id="display" class="display" readonly>
+            <div class="button-container">
+                <button class="button" id="clear">C</button>
+                <button class="button" id="backspace">←</button>
+                <button class="button operator" id="divide">/</button>
+                <button class="button" id="7">7</button>
+                <button class="button" id="8">8</button>
+                <button class="button" id="9">9</button>
+                <button class="button operator" id="multiply">*</button>
+                <button class="button" id="4">4</button>
+                <button class="button" id="5">5</button>
+                <button class="button" id="6">6</button>
+                <button class="button operator" id="subtract">-</button>
+                <button class="button" id="1">1</button>
+                <button class="button" id="2">2</button>
+                <button class="button" id="3">3</button>
+                <button class="button operator" id="add">+</button>
+                <button class="button" id="0">0</button>
+                <button class="button" id="decimal">.</button>
+                <button class="button operator" id="equals">=</button>
             </div>
-        </main>
-        <dialog id="historyDialog" role="dialog" aria-modal="true"
-            aria-labelledby="historyDialogTitle" hidden>
-            <h2 id="historyDialogTitle">Calculation History</h2>
-            <div id="historyContent" role="document" aria-live="polite"
-                aria-atomic="true"></div>
-            <button id="closeHistoryButton" onclick="closeHistory()"
-                aria-label="Close History">Close</button>
-        </dialog>
-        <script async
-            src="https://cdnjs.cloudflare.com/ajax/libs/mathjs/10.4.0/math.js"></script>
-        <script async src="script.js"></script>
+        </div>
+
+        <script src="script.js"></script>
     </body>
 </html>
