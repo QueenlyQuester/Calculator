@@ -192,3 +192,22 @@ function handleDecimalButton() {
     appendToCurrentOperation(".");
   }
 }
+themeSwitcher.addEventListener("click", () => {
+  if (darkTheme.checked) {
+    setDarkTheme();
+    announceThemeChange("Dark theme enabled");
+  } else {
+    setLightTheme();
+    announceThemeChange("Light theme enabled");
+  }
+});
+
+function announceThemeChange(message) {
+  let themeChangeElement = document.getElementById(
+    "theme-changed-notification"
+  );
+  themeChangeElement.textContent = message;
+  setTimeout(() => {
+    themeChangeElement.textContent = "";
+  }, 2000);
+}

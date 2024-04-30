@@ -14,32 +14,34 @@
             <div class="calculator">
                 <input type="text" id="display" class="display" readonly
                     aria-label="Calculator display">
-                <div class="button-container">
-                    <button class="button" aria-label="Clear">C</button>
-                    <button class="button" aria-label="Backspace">←</button>
-                    <button class="button operator"
-                        aria-label="Divide">/</button>
-                    <button class="button" aria-label="7">7</button>
-                    <button class="button" aria-label="8">8</button>
-                    <button class="button" aria-label="9">9</button>
-                    <button class="button operator"
-                        aria-label="Multiply">*</button>
+                <div role="group" aria-label="Calculator buttons"
+                    class="button-container">
+                    <button class="button" aria-label="1">1</button>
+                    <button class="button" aria-label="2">2</button>
+                    <button class="button" aria-label="3">3</button>
+                    <button class="button operator" aria-label="Add">+</button>
                     <button class="button" aria-label="4">4</button>
                     <button class="button" aria-label="5">5</button>
                     <button class="button" aria-label="6">6</button>
                     <button class="button operator"
                         aria-label="Subtract">-</button>
-                    <button class="button" aria-label="1">1</button>
-                    <button class="button" aria-label="2">2</button>
-                    <button class="button" aria-label="3">3</button>
-                    <button class="button operator" aria-label="Add">+</button>
+                    <button class="button" aria-label="7">7</button>
+                    <button class="button" aria-label="8">8</button>
+                    <button class="button" aria-label="9">9</button>
+                    <button class="button operator"
+                        aria-label="Multiply">*</button>
                     <button class="button" aria-label="0">0</button>
                     <button class="button" aria-label="Decimal">.</button>
                     <button class="button operator"
                         aria-label="Equals">=</button>
+                    <button class="button operator"
+                        aria-label="Divide">/</button>
+                    <button class="button" aria-label="Clear">C</button>
+                    <button class="button" aria-label="Backspace">←</button>
                 </div>
             </div>
-            <div class="theme-switcher">
+            <div role="group" aria-label="Theme switcher"
+                class="theme-switcher">
                 <input type="radio" name="theme" id="light-theme" checked
                     aria-label="Light theme">
                 <label for="light-theme"></label>
@@ -51,6 +53,8 @@
                 <ul id="history-log-list"
                     aria-label="Calculator history log"></ul>
             </div>
+            <div role="alert" aria-live="polite"
+                id="theme-changed-notification"></div>
         </main>
         <script src="script.js"></script>
     </body>
