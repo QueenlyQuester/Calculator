@@ -9,7 +9,7 @@ let currentOperand = "";
 let previousOperand = "";
 let operation = null;
 
-buttons.map((button) => {
+buttons.forEach((button) => {
   button.addEventListener("click", (e) => {
     const buttonText = e.target.innerText;
 
