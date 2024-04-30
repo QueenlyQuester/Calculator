@@ -1,39 +1,100 @@
-<!DOCTYPE html>
-<html>
+ <!DOCTYPE html>
+<html lang="en">
     <head>
-        <title>Calculator</title>
-        <link rel="stylesheet" type="text/css" href="styles.css" />
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>
+            Advanced Calculator
+        </title>
+        <link
+            href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+            rel="stylesheet" />
+        <meta content="noindex, nofollow" name="robots" />
     </head>
     <body>
-        <div id="calculator">
-            <div id="display"></div>
-            <div id="buttons">
-                <button class="number" value="7">7</button>
-                <button class="number" value="8">8</button>
-                <button class="number" value="9">9</button>
-                <button class="operation" value="/">/</button>
-                <button class="number" value="4">4</button>
-                <button class="number" value="5">5</button>
-                <button class="number" value="6">6</button>
-                <button class="operation" value="*">*</button>
-                <button class="number" value="1">1</button>
-                <button class="number" value="2">2</button>
-                <button class="number" value="3">3</button>
-                <button class="operation" value="-">-</button>
-                <button class="number" value="0">0</button>
-                <button class="number" value=".">.</button>
-                <button class="operation" value="+">+</button>
-                <button id="equals">=</button>
-                <button class="operation" value="^">^</button>
-                <button class="operation" value="sqrt">√</button>
-                <button class="operation" value="sin">sin</button>
-                <button class="operation" value="cos">cos</button>
-                <button class="operation" value="tan">tan</button>
-                <button class="constant" value="pi">π</button>
-                <button class="constant" value="e">e</button>
-                <button id="clear">C</button>
+        <div class="calculator">
+            <input class="form-control" id="display" readonly type="text" />
+            <div class="buttons">
+                <button class="btn btn-light" onclick="clearDisplay()">
+                    C
+                </button>
+                <button class="btn btn-light"
+                    onclick="appendToDisplay('sqrt(')">
+                    √
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('^')">
+                    ^
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('7')">
+                    7
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('8')">
+                    8
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('9')">
+                    9
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('/')">
+                    /
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('sin(')">
+                    sin
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('cos(')">
+                    cos
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('4')">
+                    4
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('5')">
+                    5
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('6')">
+                    6
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('*')">
+                    *
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('tan(')">
+                    tan
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('log(')">
+                    log
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('1')">
+                    1
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('2')">
+                    2
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('3')">
+                    3
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('-')">
+                    -
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('pi')">
+                    π
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('e')">
+                    e
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('0')">
+                    0
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('.')">
+                    .
+                </button>
+                <button class="btn btn-light" onclick="calculate()">
+                    =
+                </button>
+                <button class="btn btn-light" onclick="appendToDisplay('+')">
+                    +
+                </button>
             </div>
         </div>
-        <script src="script.js"></script>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js">
+  </script>
     </body>
 </html>
