@@ -1,61 +1,39 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
     <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Calculator App</title>
-        <link rel="stylesheet" href="styles.css">
+        <title>BLACKBOXAI Calculator</title>
+        <link rel="stylesheet" type="text/css" href="styles.css" />
     </head>
     <body>
-        <header>
-            <h1 class="header">Calculator</h1>
-        </header>
-        <main>
-            <div class="calculator">
-                <input type="text" id="display" class="display" readonly
-                    aria-label="Calculator display">
-                <div role="group" aria-label="Calculator buttons"
-                    class="button-container">
-                    <button class="button" aria-label="1">1</button>
-                    <button class="button" aria-label="2">2</button>
-                    <button class="button" aria-label="3">3</button>
-                    <button class="button operator" aria-label="Add">+</button>
-                    <button class="button" aria-label="4">4</button>
-                    <button class="button" aria-label="5">5</button>
-                    <button class="button" aria-label="6">6</button>
-                    <button class="button operator"
-                        aria-label="Subtract">-</button>
-                    <button class="button" aria-label="7">7</button>
-                    <button class="button" aria-label="8">8</button>
-                    <button class="button" aria-label="9">9</button>
-                    <button class="button operator"
-                        aria-label="Multiply">*</button>
-                    <button class="button" aria-label="0">0</button>
-                    <button class="button" aria-label="Decimal">.</button>
-                    <button class="button operator"
-                        aria-label="Equals">=</button>
-                    <button class="button operator"
-                        aria-label="Divide">/</button>
-                    <button class="button" aria-label="Clear">C</button>
-                    <button class="button" aria-label="Backspace">←</button>
-                </div>
+        <div id="calculator">
+            <div id="display"></div>
+            <div id="buttons">
+                <button class="number" value="7">7</button>
+                <button class="number" value="8">8</button>
+                <button class="number" value="9">9</button>
+                <button class="operation" value="/">/</button>
+                <button class="number" value="4">4</button>
+                <button class="number" value="5">5</button>
+                <button class="number" value="6">6</button>
+                <button class="operation" value="*">*</button>
+                <button class="number" value="1">1</button>
+                <button class="number" value="2">2</button>
+                <button class="number" value="3">3</button>
+                <button class="operation" value="-">-</button>
+                <button class="number" value="0">0</button>
+                <button class="number" value=".">.</button>
+                <button class="operation" value="+">+</button>
+                <button id="equals">=</button>
+                <button class="operation" value="^">^</button>
+                <button class="operation" value="sqrt">√</button>
+                <button class="operation" value="sin">sin</button>
+                <button class="operation" value="cos">cos</button>
+                <button class="operation" value="tan">tan</button>
+                <button class="constant" value="pi">π</button>
+                <button class="constant" value="e">e</button>
+                <button id="clear">C</button>
             </div>
-            <div role="group" aria-label="Theme switcher"
-                class="theme-switcher">
-                <input type="radio" name="theme" id="light-theme" checked
-                    aria-label="Light theme">
-                <label for="light-theme"></label>
-                <input type="radio" name="theme" id="dark-theme"
-                    aria-label="Dark theme">
-                <label for="dark-theme"></label>
-            </div>
-            <div class="history-log">
-                <ul id="history-log-list"
-                    aria-label="Calculator history log"></ul>
-            </div>
-            <div role="alert" aria-live="polite"
-                id="theme-changed-notification"></div>
-        </main>
+        </div>
         <script src="script.js"></script>
     </body>
 </html>
